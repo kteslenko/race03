@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -Iinc -lncursesw
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -Iinc -lncurses
 OUT = matrix_rain
 
 all: $(OUT)

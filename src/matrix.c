@@ -127,7 +127,7 @@ static void fill_first_row(t_matrix *matrix, t_runeset *runeset) {
     }
 }
 
-void matrix_rain(t_runeset *runeset, t_colorset *colorset, int timeout) {
+void matrix_rain(t_runeset *runeset, t_colorset *colorset, int timeout, bool screensaver) {
     t_matrix *matrix = new_matrix();
 
     while (true) {
@@ -138,13 +138,9 @@ void matrix_rain(t_runeset *runeset, t_colorset *colorset, int timeout) {
         print_matrix(matrix, runeset, colorset);
         refresh();
         timeout(timeout);
-        switch (getch()) {
-        	case 'q':
-        		refresh();
-        		endwin();
-        		exit(0);
-            	break;
-        }
+        if (is_exit(screensaver)) {
+			break;
+		}
     }
 
     del_matrix(matrix);
