@@ -45,7 +45,7 @@ static void handle_resize(t_matrix *matrix) {
     matrix->rows = temp_rows;
 }
 
-static void print_matrix(t_matrix *matrix, t_runeset *runeset) {
+static void print_matrix(t_matrix *matrix, t_runeset *runeset, t_colorset *colorset) {
     bool first = true;
 
     for (int i = 0; i < matrix->cols; i++) {
@@ -56,12 +56,10 @@ static void print_matrix(t_matrix *matrix, t_runeset *runeset) {
                 continue;
             }
             if (first) {
-                attroff(COLOR_PAIR(2));
-                attron(COLOR_PAIR(1));
+                colorset->set_head_color(colorset);
             }
             else {
-                attroff(COLOR_PAIR(1));
-                attron(COLOR_PAIR(2));
+                colorset->set_tail_color(colorset);
             }
             matrix->buf[i][j] = get_rune(runeset);
             mvprintw(j, i * 2, "%lc", matrix->buf[i][j]);
@@ -129,7 +127,7 @@ static void fill_first_row(t_matrix *matrix, t_runeset *runeset) {
     }
 }
 
-void matrix_rain(t_runeset *runeset, int timeout) {
+void matrix_rain(t_runeset *runeset, t_colorset *colorset, int timeout) {
     t_matrix *matrix = new_matrix();
 
     while (true) {
@@ -137,7 +135,7 @@ void matrix_rain(t_runeset *runeset, int timeout) {
         move_down(matrix);
         fill_first_row(matrix, runeset);
         clear();
-        print_matrix(matrix, runeset);
+        print_matrix(matrix, runeset, colorset);
         refresh();
         timeout(timeout);
         if (getch() == 'q') {

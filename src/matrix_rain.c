@@ -7,7 +7,7 @@ int main() {
     curs_set(0);
     init_colors();
 
-    matrix_rain(japanese_runeset(), 80);
+    matrix_rain(japanese_runeset(), static_colorset(2), 80);
 
     endwin();
 }
