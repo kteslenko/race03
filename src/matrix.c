@@ -90,8 +90,9 @@ static t_matrix *new_matrix() {
     t_matrix *matrix = malloc(sizeof(t_matrix));
 
     matrix->buf = NULL;
-    matrix->cols = 0;
-    matrix->rows = 0;
+    matrix->cols = 128;
+    matrix->rows = 30;
+    matrix->buf = realloc_buf(NULL, 128, 30);
 
     return matrix;
 }
