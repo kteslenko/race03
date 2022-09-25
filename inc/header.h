@@ -24,7 +24,10 @@ typedef struct s_colorset {
     void (*set_tail_color)(struct s_colorset *colorset);
 }              t_colorset;
 
+int mx_strlen(const char *s);
+void mx_printerr(const char *s);
 void matrix_rain(t_runeset *runeset, t_colorset *colorset, int timeout);
+void mx_intro();
 
 t_runeset *ascii_runeset();
 t_runeset *japanese_runeset();

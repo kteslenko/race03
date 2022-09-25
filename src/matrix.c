@@ -138,8 +138,12 @@ void matrix_rain(t_runeset *runeset, t_colorset *colorset, int timeout) {
         print_matrix(matrix, runeset, colorset);
         refresh();
         timeout(timeout);
-        if (getch() == 'q') {
-            break;
+        switch (getch()) {
+        	case 'q':
+        		refresh();
+        		endwin();
+        		exit(0);
+            	break;
         }
     }
 
